@@ -3,6 +3,7 @@ package dk.martin.luckywheel
 import android.os.Bundle
 import android.util.Log
 import android.view.MotionEvent
+import android.view.animation.DecelerateInterpolator
 import androidx.appcompat.app.AppCompatActivity
 import coil.api.load
 import dk.adaptmobile.amkotlinutil.extensions.rotate
@@ -15,7 +16,7 @@ class MainActivity : AppCompatActivity() {
     var fingerRotation: Double = 0.toDouble()
     var newFingerRotation: Double = 0.toDouble()
     var currentFingerRotation: Double = 0.toDouble()
-    var clockWise = true
+    var clockwise = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,9 +50,9 @@ class MainActivity : AppCompatActivity() {
                         Math.toDegrees(atan2(touchX - centerX, centerY - touchY).toDouble())
 
                     // Set the direction of the wheel's rotation
-                    clockWise = currentFingerRotation < newFingerRotation
+                    clockwise = currentFingerRotation < newFingerRotation
 
-
+                    // Used for calculating if clockwise or counter clockwise
                     currentFingerRotation = newFingerRotation
 
 
@@ -60,10 +61,18 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
                 MotionEvent.ACTION_UP -> {
-                    if (clockWise) {
-                        imageView.rotate(2800f, animated = true, animationDuration = 5000)
+                    if (clockwise) {
+                        imageView.rotate(
+                            rotation = 2000f,
+                            animationDuration = 4500,
+                            interpolator = DecelerateInterpolator()
+                        )
                     } else {
-                        imageView.rotate(-2800f, animated = true, animationDuration = 5000)
+                        imageView.rotate(
+                            rotation = -2000f,
+                            animationDuration = 4500,
+                            interpolator = DecelerateInterpolator()
+                        )
                     }
 
                     Log.e("ACTION", "ACTION_UP")
