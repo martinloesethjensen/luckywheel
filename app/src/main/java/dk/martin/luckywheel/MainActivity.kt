@@ -39,13 +39,21 @@ class MainActivity : AppCompatActivity() {
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {
                     Log.e("ACTION", "ACTION_DOWN")
+
+                    imageView.animate().cancel()
+
                     viewRotation = imageView.rotation
+
+                    // Set the rotation in degrees
                     fingerRotation =
                         Math.toDegrees(atan2(touchX - centerX, centerY - touchY).toDouble())
+
                     true
                 }
+
                 MotionEvent.ACTION_MOVE -> {
                     Log.e("ACTION", "ACTION_MOVE")
+
                     newFingerRotation =
                         Math.toDegrees(atan2(touchX - centerX, centerY - touchY).toDouble())
 
@@ -55,12 +63,16 @@ class MainActivity : AppCompatActivity() {
                     // Used for calculating if clockwise or counter clockwise
                     currentFingerRotation = newFingerRotation
 
-
+                    // Set the rotation from touch
                     imageView.rotation =
                         (viewRotation + newFingerRotation - fingerRotation).toFloat()
+
                     true
                 }
+
                 MotionEvent.ACTION_UP -> {
+                    Log.e("ACTION", "ACTION_UP")
+
                     if (clockwise) {
                         imageView.rotate(
                             rotation = 2000f,
@@ -75,9 +87,9 @@ class MainActivity : AppCompatActivity() {
                         )
                     }
 
-                    Log.e("ACTION", "ACTION_UP")
                     true
                 }
+
                 else -> true
             }
         }
