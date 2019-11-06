@@ -17,12 +17,5 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/avatars" />
 
-<!--    <ve.com.abicelis.prizewheellib.PrizeWheelView-->
-<!--        android:id="@+id/wheel"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:layout_gravity="center"-->
-<!--        />-->
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
